@@ -1,0 +1,26 @@
+<div class="stepsdemo-content">
+    <p-card>
+        <ng-template pTemplate="title">
+            Upload Image
+        </ng-template>
+
+        <ng-template pTemplate="content">
+
+                <div class="field mb-3">
+                    <label for="age">Select Image File</label>
+                    <p-fileUpload mode="basic" [customUpload]="true" accept="image/*" [maxFileSize]="1000000" [fileLimit]="1" #fileUpload (uploadHandler)="uploadHandler($event,fileUpload)"  >
+                    </p-fileUpload>
+                </div>
+                <div class="image-box mb-3">
+                    <img src="{{imagePath}}" width="200">
+                </div>
+                <p-progressBar [value]="progress" [showValue]="true"></p-progressBar>
+
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="grid grid-nogutter justify-content-end">
+                <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>

@@ -1,0 +1,95 @@
+<div class="stepsdemo-content">
+  <p-card>
+    <ng-template pTemplate="title">
+      Personal Information
+    </ng-template>
+    <ng-template pTemplate="subtitle">
+      Enter your personal information
+    </ng-template>
+    <ng-template pTemplate="content">
+      <div class="row">
+        <div class="col-3 p-fluid mb-3 ">
+          <div class="field">
+            <label for="amount" class="form-label">Amount </label>
+
+            <div class="input-group">
+              <span class="input-group-text">$</span>
+              <input #amount="ngModel" type="number" required [(ngModel)]="formInfo.amount"
+              class="form-control" aria-label="Amount (to the nearest dollar)">
+              <span class="input-group-text">.00</span>
+            </div>
+
+            <div *ngIf="(amount.invalid && submitted) || (amount.dirty && amount.invalid) ">
+              <div class="text-danger" *ngIf="amount.errors?.['required']">
+                Amount is required.
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-3 p-fluid mb-3 ">
+          <div class="field">
+            <label for="date" class="form-label">Date </label>
+            <input #date="ngModel" id="date" type="date"  [min]="minDateValue" [max]="maxDateValue" required
+              [(ngModel)]="formInfo.date" class="form-control" onkeypress="return false"
+              [ngClass]="{'ng-dirty': (date.invalid && submitted) || (date.dirty && date.invalid)}">
+
+            <div *ngIf="(date.invalid && submitted) || (date.dirty && date.invalid) ">
+              <div class="text-danger" *ngIf="date.errors?.['required']">
+                Source is required.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-3 p-fluid mb-3 ">
+          <div class="field">
+            <label for="status" class="form-label">Status </label>
+            <select class="form-select" (change)="onChange($event)" name="status"
+            [(ngModel)]="formInfo.status" required #status="ngModel"
+             [ngClass]="{'ng-dirty': (status.invalid && submitted) || (status.dirty && status.invalid)}">
+              <option value="">Choose Status....</option>
+              <option *ngFor="let item of statusItems" [ngValue]="item.id">
+                {{ item.text }}
+              </option>
+            </select>
+            <div *ngIf="(status.invalid && submitted) || (status.dirty && status.invalid) ">
+              <div class="text-danger" *ngIf="status.errors?.['required']">
+                Source is required.
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-3 p-fluid mb-3 ">
+          <div class="field">
+            <label for="source" class="form-label">Source </label>
+            <input #source="ngModel" id="source" type="text" pattern="[a-zA-Z ]*" class="form-control" required  [(ngModel)]="formInfo.source"
+              [ngClass]="{'ng-dirty': (source.invalid && submitted) || (source.dirty && source.invalid)}">
+
+            <div *ngIf="(source.invalid && submitted) || (source.dirty && source.invalid) ">
+              <div class="text-danger" *ngIf="source.errors?.['required']">
+                Source is required.
+              </div>
+              <div class="text-danger" *ngIf="source.errors?.['forbiddenName']">
+                Source cannot be Bob.
+              </div>
+              <div class="text-danger" *ngIf="source.errors?.['pattern']">
+                Please enter only letters.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+</ng-template>
+<ng-template pTemplate="footer">
+  <div class="grid grid-nogutter justify-content-between ng-star-inserted mt-4">
+    <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
+
+    <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
+  </div>
+</ng-template>
+</p-card>
+</div>
