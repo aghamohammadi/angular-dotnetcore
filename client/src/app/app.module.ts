@@ -6,16 +6,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterComponent } from './layout/footer/footer.component';
-import { NavComponent } from './layout/nav/nav.component';
-import { MenubarModule } from 'primeng/menubar';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './layout/header/header.component';
+import { LayoutComponent } from './layout/layout/layout.component';
+import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+import { AdminHeaderComponent } from './layout/admin-header/admin-header.component';
+import { AdminFooterComponent } from './layout/admin-footer/admin-footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    NavComponent
+    HeaderComponent,
+    LayoutComponent,
+    AdminLayoutComponent,
+    AdminHeaderComponent,
+    AdminFooterComponent
   ],
   imports: [
     BrowserModule,
@@ -23,8 +30,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CoreModule,
     SharedModule,
     AppRoutingModule,
-    HttpClientModule,
-    MenubarModule
+    HttpClientModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,15 +1,17 @@
 import { MessageService } from 'primeng/api';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StepsDemoService } from '@core/services/steps-demo.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { StepsDemoUser } from '@shared/models/steps-demo-user';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-table',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
+  private unsubscribe$ = new Subject();
 
   selectedUsers: StepsDemoUser[]=[];
   users!: StepsDemoUser[];
@@ -20,9 +22,8 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.users = this.stepsDemoService.getStepsDemoInfo().users;
-
-
     this.route.queryParams
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe(params => {
         let transferdUsers = params["user"]?.split(',').map((str: any) => Number(str));;
 
@@ -31,22 +32,18 @@ export class UserComponent implements OnInit {
         }
       }
       );
-
   }
 
 
 
   onRowSelect(event:any) {
-    this.selectedUsers.push(event.data)
-    this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: event.data.firstname });
+    console.log('onRowSelect');
+    this.messageService.add({ severity: 'info', summary: 'User Selected', detail: event.data.firstname });
   }
 
   onRowUnselect(event: any) {
-    this.selectedUsers = this.selectedUsers.filter(function (obj) {
-      return obj.id !== event.data.id;
-    });
-
-    this.messageService.add({ severity: 'info', summary: 'Product Unselected', detail: event.data.firstname });
+    console.log('onRowUnselect');
+    this.messageService.add({ severity: 'info', summary: 'User Unselected', detail: event.data.firstname });
   }
 
 
@@ -67,4 +64,8 @@ export class UserComponent implements OnInit {
     this.router.navigate(['steps/form']);
   }
 
+  ngOnDestroy() {
+    this.unsubscribe$.next(void 0);
+    this.unsubscribe$.complete();
+  }
 }

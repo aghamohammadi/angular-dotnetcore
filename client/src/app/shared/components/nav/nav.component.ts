@@ -19,6 +19,11 @@ export class NavComponent implements OnInit {
         routerLink: "/"
       },
       {
+        label: 'Admin',
+        icon: 'pi pi-fw pi-user',
+        routerLink: "/admin"
+      },
+      {
         label: 'Steps',
         icon: 'pi pi-fw pi-steps',
         routerLink: "steps"

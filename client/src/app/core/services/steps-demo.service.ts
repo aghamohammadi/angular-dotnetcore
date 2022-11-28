@@ -37,7 +37,7 @@ export class StepsDemoService {
 
 
   getStepsDemoInfo() {
-    console.log(this.stepsDemoInfo);
+    //console.log(this.stepsDemoInfo);
 
     return this.stepsDemoInfo;
   }
