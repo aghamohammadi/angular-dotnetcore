@@ -41,7 +41,8 @@ namespace angular_backend.Controllers
                     {
                         await file.CopyToAsync(stream);
                     }
-                    return Ok(new {status=200, url=$"{_siteConfig.Value.SiteUrl}/Resources/Images/{fileName}" });
+                    return StatusCode(200,new {url = $"{_siteConfig.Value.SiteUrl}/Resources/Images/{fileName}"});
+                    // return Ok(new {status=200, url=$"{_siteConfig.Value.SiteUrl}/Resources/Images/{fileName}" });
                 }
                 else
                 {
