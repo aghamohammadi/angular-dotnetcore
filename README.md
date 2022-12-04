@@ -1,5 +1,7 @@
 # FrontEnd
 
+Angular & Angular Ngrx
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6.
 
 PrimeNg “Steps” component or design a wizard, it’s quite up to you then we need our form component to include 4 steps.

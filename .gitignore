@@ -42,6 +42,48 @@
 /client/Thumbs.db
 
 
+# Compiled output client-ngrx
+/client-ngrx/dist
+/client-ngrx/tmp
+/client-ngrx/out-tsc
+/client-ngrx/bazel-out
+
+# Node
+/client-ngrx/node_modules
+/client-ngrx/npm-debug.log
+/client-ngrx/yarn-error.log
+
+# IDEs and editors
+/client-ngrx/.idea/
+/client-ngrx/.project
+/client-ngrx/.classpath
+/client-ngrx/.c9/
+/client-ngrx/*.launch
+/client-ngrx/.settings/
+/client-ngrx/*.sublime-workspace
+
+# Visual Studio Code
+/client-ngrx/.vscode/*
+/client-ngrx/!.vscode/settings.json
+/client-ngrx/!.vscode/tasks.json
+/client-ngrx/!.vscode/launch.json
+/client-ngrx/!.vscode/extensions.json
+/client-ngrx/.history/*
+
+# Miscellaneous
+/client-ngrx/.angular/cache
+/client-ngrx/.sass-cache/
+/client-ngrx/connect.lock
+/client-ngrx/coverage
+/client-ngrx/libpeerconnection.log
+/client-ngrx/testem.log
+/client-ngrx/typings
+
+# System files
+/client-ngrx/.DS_Store
+/client-ngrx/Thumbs.db
+
+
 
 
 # Compiled output server
