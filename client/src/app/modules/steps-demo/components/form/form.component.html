@@ -7,73 +7,76 @@
       Enter your personal information
     </ng-template>
     <ng-template pTemplate="content">
+    <form *ngIf="formInfo" [formGroup]="formInfo">
       <div class="row">
-        <div class="col-3 p-fluid mb-3 ">
+        <div class="col-md-3 p-fluid mb-3 ">
           <div class="field">
             <label for="amount" class="form-label">Amount </label>
 
             <div class="input-group">
               <span class="input-group-text">$</span>
-              <input #amount="ngModel" type="number" required [(ngModel)]="formInfo.amount"
-              class="form-control" aria-label="Amount (to the nearest dollar)">
+              <input type="number" required formControlName="amount" class="form-control"
+                aria-label="Amount (to the nearest dollar)">
               <span class="input-group-text">.00</span>
             </div>
 
-            <div *ngIf="(amount.invalid && submitted) || (amount.dirty && amount.invalid) ">
-              <div class="text-danger" *ngIf="amount.errors?.['required']">
+            <div *ngIf="formInfo.get('amount')?.invalid && formInfo.get('amount')?.touched">
+              <div class="text-danger" *ngIf="formInfo.get('amount')?.errors?.['required']">
                 Amount is required.
               </div>
             </div>
 
           </div>
         </div>
-        <div class="col-3 p-fluid mb-3 ">
+        <div class="col-md-3 p-fluid mb-3 ">
           <div class="field">
             <label for="date" class="form-label">Date </label>
-            <input #date="ngModel" id="date" type="date"  [min]="minDateValue" [max]="maxDateValue" required
-              [(ngModel)]="formInfo.date" class="form-control" onkeypress="return false"
-              [ngClass]="{'ng-dirty': (date.invalid && submitted) || (date.dirty && date.invalid)}">
+            <input id="date" type="date" formControlName="date" [min]="minDateValue" [max]="maxDateValue" required
+              class="form-control" onkeypress="return false"
+              [ngClass]="{'ng-dirty': (formInfo.get('date')?.invalid && submitted) || (formInfo.get('date')?.dirty && formInfo.get('date')?.invalid)}">
 
-            <div *ngIf="(date.invalid && submitted) || (date.dirty && date.invalid) ">
-              <div class="text-danger" *ngIf="date.errors?.['required']">
+            <div
+              *ngIf="(formInfo.get('date')?.invalid && submitted) || (formInfo.get('date')?.dirty && formInfo.get('date')?.invalid) ">
+              <div class="text-danger" *ngIf="formInfo.get('date')?.errors?.['required']">
                 Source is required.
               </div>
             </div>
           </div>
         </div>
-        <div class="col-3 p-fluid mb-3 ">
+        <div class="col-md-3 p-fluid mb-3 ">
           <div class="field">
             <label for="status" class="form-label">Status </label>
-            <select class="form-select" (change)="onChange($event)" name="status"
-            [(ngModel)]="formInfo.status" required #status="ngModel"
-             [ngClass]="{'ng-dirty': (status.invalid && submitted) || (status.dirty && status.invalid)}">
+            <select class="form-select" formControlName="status" name="status" required
+              [ngClass]="{'ng-dirty': (formInfo.get('status')?.invalid && submitted) || (formInfo.get('status')?.dirty && formInfo.get('status')?.invalid)}">
               <option value="">Choose Status....</option>
               <option *ngFor="let item of statusItems" [ngValue]="item.id">
                 {{ item.text }}
               </option>
             </select>
-            <div *ngIf="(status.invalid && submitted) || (status.dirty && status.invalid) ">
-              <div class="text-danger" *ngIf="status.errors?.['required']">
-                Source is required.
+            <div
+              *ngIf="(formInfo.get('status')?.invalid && submitted) || (formInfo.get('status')?.dirty && formInfo.get('status')?.invalid) ">
+              <div class="text-danger" *ngIf="formInfo.get('status')?.errors?.['required']">
+                Status is required.
               </div>
             </div>
 
           </div>
         </div>
-        <div class="col-3 p-fluid mb-3 ">
+        <div class="col-md-3 p-fluid mb-3 ">
           <div class="field">
             <label for="source" class="form-label">Source </label>
-            <input #source="ngModel" id="source" type="text" pattern="[a-zA-Z ]*" class="form-control" required  [(ngModel)]="formInfo.source"
-              [ngClass]="{'ng-dirty': (source.invalid && submitted) || (source.dirty && source.invalid)}">
+            <input formControlName="source" id="source" type="text" class="form-control" required
+              [ngClass]="{'ng-dirty': (formInfo.get('source')?.invalid && submitted) || (formInfo.get('source')?.dirty && formInfo.get('source')?.invalid)}">
 
-            <div *ngIf="(source.invalid && submitted) || (source.dirty && source.invalid) ">
-              <div class="text-danger" *ngIf="source.errors?.['required']">
+            <div
+              *ngIf="(formInfo.get('source')?.invalid && submitted) || (formInfo.get('source')?.dirty && formInfo.get('source')?.invalid) ">
+              <div class="text-danger" *ngIf="formInfo.get('source')?.errors?.['required']">
                 Source is required.
               </div>
-              <div class="text-danger" *ngIf="source.errors?.['forbiddenName']">
+              <div class="text-danger" *ngIf="formInfo.get('source')?.errors?.['forbiddenName']">
                 Source cannot be Bob.
               </div>
-              <div class="text-danger" *ngIf="source.errors?.['pattern']">
+              <div class="text-danger" *ngIf="formInfo.get('source')?.errors?.['pattern']">
                 Please enter only letters.
               </div>
             </div>
@@ -81,6 +84,9 @@
         </div>
 
       </div>
+    </form>
+
+
 
 
 </ng-template>

@@ -13,13 +13,17 @@ export class StepsDemoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.init();
+  }
+
+
+  init(){
     console.log('ngOnInit fff');
     this.items = [
-      { label: "Upload", routerLink:"upload" },
+      { label: "Upload", routerLink: "upload" },
       { label: "Form", routerLink: "form" },
       { label: "User", routerLink: "user" },
       { label: "Summary", routerLink: "summary" },
     ];
   }
-
 }

@@ -13,10 +13,7 @@ export class UploadComponent implements OnInit {
   uploadedFile: any;
   uploadPercent: any;
   progress: number = 0;
-
   imagePath!: string;
-
-
   submitted: boolean = false;
 
   constructor(public stepsDemoService: StepsDemoService, private messageService: MessageService, private router: Router) { }

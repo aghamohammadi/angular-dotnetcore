@@ -2,6 +2,7 @@ import { StepsDemoForm, StepsDemoStatus } from '@shared/models/steps-demo-form';
 import { StepsDemoService } from '@core/services/steps-demo.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class FormComponent implements OnInit {
 
-  formInfo!: StepsDemoForm;
+  formInfo!: FormGroup;
   minDateValue!: string ;
   maxDateValue!: string;
   selectedStatus!: StepsDemoStatus;
@@ -18,6 +19,30 @@ export class FormComponent implements OnInit {
   submitted: boolean = false;
 
   constructor(public stepsDemoService: StepsDemoService, private router: Router) {
+    this.init();
+  }
+
+
+
+  ngOnInit() {
+    this.initForm();
+  }
+
+
+  private initForm() {
+    const formInfo = this.stepsDemoService.getStepsDemoInfo().form;
+
+    this.formInfo = new FormGroup({
+      amount: new FormControl(formInfo?.amount, [Validators.required]),
+      date: new FormControl(formInfo?.date, Validators.required),
+      status: new FormControl(formInfo?.status, Validators.required),
+      source: new FormControl(formInfo?.source, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
+    });
+  }
+
+
+
+  private init() {
     let date = new Date();
     date.setDate(date.getDate() + 1);
     this.minDateValue = date.toISOString().split('T')[0];
@@ -31,19 +56,12 @@ export class FormComponent implements OnInit {
     ];
   }
 
-  ngOnInit() {
-    this.formInfo = this.stepsDemoService.getStepsDemoInfo().form;
-  }
 
-  onChange(event:any){
-    this.formInfo.status = event.target.value;
-  }
 
   nextPage() {
-    if (this.formInfo.amount && this.formInfo.date && this.formInfo.status && this.formInfo.source) {
-      this.stepsDemoService.stepsDemoInfo.form = this.formInfo;
+    if (this.formInfo.valid) {
+      this.stepsDemoService.stepsDemoInfo.form = {...this.formInfo.value};
       this.router.navigate(['steps/user']);
-
       return;
     }
 

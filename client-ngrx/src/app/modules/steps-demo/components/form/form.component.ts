@@ -25,8 +25,33 @@ export class FormComponent implements OnInit, OnDestroy {
   submitted: boolean = false;
 
   constructor(private store$: Store<StepsDemoState>,  private router: Router) {
+    this.init();
+  }
 
+  ngOnInit() {
     this.initForm();
+    this.getFormInfo();
+  }
+
+  private getFormInfo() {
+    this.store$
+      .select(fromSelector.formData)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((form: any) =>
+        this.formInfo.patchValue(form, { emitEvent: false })
+      );
+  }
+
+  private initForm() {
+    this.formInfo = new FormGroup({
+      amount: new FormControl(null, [Validators.required]),
+      date: new FormControl(null, Validators.required),
+      status: new FormControl(null, Validators.required),
+      source: new FormControl(null, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
+    });
+  }
+
+  private init() {
     let date = new Date();
     date.setDate(date.getDate() + 1);
     this.minDateValue = date.toISOString().split('T')[0];
@@ -38,27 +63,6 @@ export class FormComponent implements OnInit, OnDestroy {
       { text: 'Pending', id: 0 },
       { text: 'Removed', id: -1 }
     ];
-  }
-
-  ngOnInit() {
-
-    this.store$
-      .select(fromSelector.formData)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((form: any) =>
-        this.formInfo.patchValue(form, { emitEvent: false })
-      );
-
-
-  }
-
-  private initForm() {
-    this.formInfo = new FormGroup({
-      amount: new FormControl(null, [Validators.required]),
-      date: new FormControl(null, Validators.required),
-      status: new FormControl(null, Validators.required),
-      source: new FormControl(null, [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
-    });
   }
 
 

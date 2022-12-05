@@ -17,19 +17,25 @@ export class SummaryComponent implements OnInit {
   constructor(public stepsDemoService: StepsDemoService, private messageService: MessageService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.stepsDemoInfo = this.stepsDemoService.getStepsDemoInfo();
+    this.getStepsDemoInfo();
+    this.getUsers();
+  }
 
+  getUsers(){
     this.route.queryParams
       .subscribe(params => {
         this.transferdUsersStr = params["user"];
-        let transferdUsers = this.transferdUsersStr?.split(',').map((str:any) => Number(str));;
+        let transferdUsers = this.transferdUsersStr?.split(',').map((str: any) => Number(str));;
 
-        if (transferdUsers){
+        if (transferdUsers) {
           this.selectedUsers = this.stepsDemoInfo.users?.filter((user: StepsDemoUser) => transferdUsers.includes(user.id))
         }
       }
       );
+  }
 
+  getStepsDemoInfo(){
+    this.stepsDemoInfo = this.stepsDemoService.getStepsDemoInfo();
   }
 
   complete() {

@@ -9,7 +9,7 @@
     <ng-template pTemplate="content">
       <form *ngIf="formInfo" [formGroup]="formInfo">
       <div class="row" >
-        <div class="col-3 p-fluid mb-3 ">
+        <div class="col-md-3 p-fluid mb-3 ">
           <div class="field">
             <label for="amount" class="form-label">Amount </label>
 
@@ -28,7 +28,7 @@
 
           </div>
         </div>
-        <div class="col-3 p-fluid mb-3 ">
+        <div class="col-md-3 p-fluid mb-3 ">
           <div class="field">
             <label for="date" class="form-label">Date </label>
             <input id="date" type="date" formControlName="date" [min]="minDateValue" [max]="maxDateValue" required
@@ -42,7 +42,7 @@
             </div>
           </div>
         </div>
-        <div class="col-3 p-fluid mb-3 ">
+        <div class="col-md-3 p-fluid mb-3 ">
           <div class="field">
             <label for="status" class="form-label">Status </label>
             <select class="form-select" formControlName="status" name="status"
@@ -61,7 +61,7 @@
 
           </div>
         </div>
-        <div class="col-3 p-fluid mb-3 ">
+        <div class="col-md-3 p-fluid mb-3 ">
           <div class="field">
             <label for="source" class="form-label">Source </label>
             <input formControlName="source" id="source" type="text" class="form-control" required

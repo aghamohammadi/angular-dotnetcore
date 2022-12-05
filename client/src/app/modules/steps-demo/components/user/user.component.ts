@@ -21,7 +21,15 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.getUsers();
+    this.getSelectedUsers();
+  }
+
+  getUsers() {
     this.users = this.stepsDemoService.getStepsDemoInfo().users;
+  }
+
+  getSelectedUsers(){
     this.route.queryParams
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(params => {
@@ -33,8 +41,6 @@ export class UserComponent implements OnInit, OnDestroy {
       }
       );
   }
-
-
 
   onRowSelect(event:any) {
     console.log('onRowSelect');

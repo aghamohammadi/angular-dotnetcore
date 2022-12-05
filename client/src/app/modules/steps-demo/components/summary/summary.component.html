@@ -7,27 +7,30 @@
       your details info
     </ng-template>
     <ng-template pTemplate="content">
-      <div class="field col-12 mb-3">
+      <div class="field col-md-4 mb-3">
         <img src="{{stepsDemoInfo.upload.imagePath}}">
       </div>
-      <div class="field col-12 mb-3">
-        <label for="class">Amount</label>
-        <div><b>{{stepsDemoInfo.form?.amount}}</b></div>
-      </div>
-      <div class="field col-12 mb-3">
-        <label for="Age">Date</label>
-        <div><b>{{stepsDemoInfo.form?.date}}</b></div>
-      </div>
-      <div class="field col-12 mb-3">
-        <label>Status</label>
-        <div> <b>{{stepsDemoInfo.form?.status}}</b></div>
-      </div>
-      <div class="field col-12 mb-3">
-        <label >Source</label>
-        <div><b>{{stepsDemoInfo.form?.source}}</b></div>
+      <div class="row">
+        <div class="field col-md-4 mb-3">
+          <label for="class">Amount</label>
+          <div><b>{{stepsDemoInfo.form?.amount}}</b></div>
+        </div>
+        <div class="field col-md-4 mb-3">
+          <label for="Age">Date</label>
+          <div><b>{{stepsDemoInfo.form?.date}}</b></div>
+        </div>
+        <div class="field col-md-4 mb-3">
+          <label>Status</label>
+          <div> <b>{{stepsDemoInfo.form?.status}}</b></div>
+        </div>
+        <div class="field col-md-4 mb-3">
+          <label>Source</label>
+          <div><b>{{stepsDemoInfo.form?.source}}</b></div>
+        </div>
       </div>
 
-      <div class="field col-12 mt-4">
+
+      <div class="field mt-4">
         <h5>Selected Users</h5>
         <p-table [value]="selectedUsers" dataKey="id" responsiveLayout="scroll">
           <ng-template pTemplate="header">

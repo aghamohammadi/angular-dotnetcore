@@ -12,7 +12,7 @@ import { StepsModule } from "primeng/steps";
 import { CardModule } from "primeng/card";
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from "primeng/toast";
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ProgressBarModule } from 'primeng/progressbar';
 
@@ -33,6 +33,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
     ProgressBarModule,
     TableModule,
     FormsModule,
+    ReactiveFormsModule,
     ToastModule
   ],
   providers: [
